@@ -35,39 +35,44 @@ function loadCalendarYears() {
   }
 }
 
-function loadCalendarDays() {
-  document.getElementById("calendarDays").innerHTML = "";
 
-  var tmpDate = new Date(year, month, 0);
-  var num = daysInMonth(month, year);
-  var dayofweek = tmpDate.getDay(); // find where to start calendar day of week
-
-  for (var i = 0; i <= dayofweek; i++) {
-    var d = document.createElement("div");
-    //d.classList.add("day");
-    //d.classList.add("blank");
-    document.getElementById("calendarDays").appendChild(d);
-  }
-
-  for (var i = 0; i < num; i++) {
-    var tmp = i + 1;
-    var d = document.createElement("div");
-    d.id = "calendarday_" + i;
-    d.className = "day";
-    d.innerHTML = tmp;
-
-    document.getElementById("calendarDays").appendChild(d);
-  }
-
-  var clear = document.createElement("div");
-  clear.className = "clear";
-  document.getElementById("calendarDays").appendChild(clear);
-}
-
+//return # of day in a month given month and year e.g. 2022 and 06, for july 2022
 function daysInMonth(month, year) {
-  var d = new Date(year, month + 1, 0);
-  return d.getDate();
+    let d = new Date(year, month + 1, 0);
+    return d.getDate();
 }
+
+function loadCalendarDays() {
+    document.getElementById("calendarDays").innerHTML = "";
+
+    var tmpDate = new Date(year, month, 0);
+    var num = daysInMonth(month, year);
+    var dayofweek = tmpDate.getDay();
+
+    // create day prefixes
+    for (var i = 0; i <= dayofweek; i++) {
+        var d = document.createElement("div");
+        d.classList.add("day");
+        d.classList.add("blank");
+        document.getElementById("calendarDays").appendChild(d);
+    }
+
+    // render the rest of the days
+    for (var i = 0; i < num; i++) {
+        var tmp = i + 1;
+        var d = document.createElement("div");
+        d.id = "calendarday_" + i;
+        d.className = "day";
+        d.innerHTML = tmp;
+        document.getElementById("calendarDays").appendChild(d);
+    }
+
+    var clear = document.createElement("div");
+    clear.className = "clear";
+    document.getElementById("calendarDays").appendChild(clear);
+}
+
+
 
 window.addEventListener("load", function () {
   var date = new Date();
