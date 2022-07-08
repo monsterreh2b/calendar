@@ -18,6 +18,8 @@ var endYear = 2020;
 var month = 0;
 var year = 0;
 
+const manyDays = document.querySelectorAll(".days");
+
 function loadCalendarYears() {
   document.getElementById("years").innerHTML = "";
 
@@ -89,6 +91,7 @@ function loadCalendarDays() {
         var tmp = i + 1;
         var d = document.createElement("div");
         d.id = "calendarday_" + i;
+        d.dataset.id = "calendarday_" + i;
         d.className = "day";
         d.innerHTML = tmp;
         document.getElementById("calendarDays").appendChild(d);
@@ -110,4 +113,15 @@ window.addEventListener("load", function () {
   loadCalendarMonths();
   loadCalendarYears();
   loadCalendarDays();
+  console.log(manyDays);
+  
+});
+
+manyDays.forEach(function (btn) {
+    //console.log(btn);
+    btn.addEventListener("click", function (e) {
+        console.log(e.target.dataset.id);
+        e.target.style.backgroundColor = "red";
+        e.target.style.color = "white";
+    })
 });
