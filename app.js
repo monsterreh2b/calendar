@@ -13,6 +13,11 @@ const months = [
   "December",
 ];
 
+var startYear = 2000;
+var endYear = 2020;
+var month = 0;
+var year = 0;
+
 function loadCalendarYears() {
   document.getElementById("years").innerHTML = "";
 
@@ -41,6 +46,28 @@ function daysInMonth(month, year) {
     let d = new Date(year, month + 1, 0);
     return d.getDate();
 }
+
+function loadCalendarMonths() {
+    for (var i = 0; i < months.length; i++) {
+        var doc = document.createElement("div");
+        doc.innerHTML = months[i];
+        doc.classList.add("dropdown-item");
+
+        doc.onclick = (function () {
+            var selectedMonth = i;
+            return function () {
+                month = selectedMonth;
+                document.getElementById("curMonth").innerHTML = months[month];
+                loadCalendarDays();
+                return month;
+            }
+        })();
+
+        document.getElementById("months").appendChild(doc);
+    }
+}
+
+
 
 function loadCalendarDays() {
     document.getElementById("calendarDays").innerHTML = "";
