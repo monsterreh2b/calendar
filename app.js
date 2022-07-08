@@ -117,6 +117,8 @@ window.addEventListener("load", function () {
   
 });
 
+
+//used many to one plus e.target.dataset.id
 manyDays.forEach(function (btn) {
     //console.log(btn);
     btn.addEventListener("click", function (e) {
